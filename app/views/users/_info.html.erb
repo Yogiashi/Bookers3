@@ -8,6 +8,14 @@
 	  <th>introduction</th>
 	  <th><%= user.introduction %></th>
   </tr>
+  <tr>
+    <th>follows</th>
+    <td><%= link_to user.followings.count, user_followings_path(user) %></td>
+  </tr>
+  <tr>
+    <th>followers</th>
+    <td><%= link_to user.followers.count, user_followers_path(user) %></td>
+  </tr>
 </table>
 <% if user != current_user %>
   <% if current_user.following?(user) %>
