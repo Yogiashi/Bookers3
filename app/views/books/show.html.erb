@@ -25,10 +25,10 @@
           <% end %>
         </tr>
       </table>
-      
-      <%= render "book_comments/index", book: @book %>
+      <div id="comment_post_<%= @book.id %>">
+        <%= render "book_comments/index", book: @book %>
+      </div>
       <%= render "book_comments/form", book: @book, book_comment: @book_comment %>
-      
     </div>
   </div>
 </div>
