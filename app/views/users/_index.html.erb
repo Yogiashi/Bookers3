@@ -15,19 +15,7 @@
         <td><%= link_to user.followings.count, user_followings_path(user) %></td>
         <th>followers</th>
         <td><%= link_to user.followers.count, user_followers_path(user) %></td>
-        <td>
-          <% if user != current_user %>
-            <% if current_user.following?(user) %>
-              <%= link_to user_relationships_path(user), method: :delete, class:"text-decoration-none" do %>
-                <button class="btn btn-danger">フォロー解除</button>
-              <% end %>
-            <% else %>
-              <%= link_to user_relationships_path(user), method: :post, class:"text-decoration-none" do %>
-                <button class="btn btn-primary">フォロー</button>
-              <% end %>
-            <% end %>
-          <% end %>
-        </td>
+        <td><%= render 'relationships/btn', user: user %></td>
         <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
         </tr>
       <% end %>
