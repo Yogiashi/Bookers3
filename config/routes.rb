@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root "homes#top"
   get "home/about"=>"homes#about"
   get 'search' => 'searches#search'
-  get 'tag' => 'books#tag'
+  get 'tag' => 'books#tag_index'
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resources :book_comments, only: [:create, :destroy]

@@ -20,9 +20,8 @@ class BooksController < ApplicationController
      @books = Book.all
     end
   end
-  
-  def tag
-    @book = Book.new
+
+  def tag_index
     @books = Book.search(params[:keyword])
   end
 
