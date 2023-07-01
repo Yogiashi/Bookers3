@@ -54,7 +54,12 @@
       </div>
     </div>
   </nav>
-  <% if user_signed_in? %>
-  <%= render 'searches/form' %>
-  <% end %>
+  <div class="d-flex  justify-content-center">
+    <div class="mr-3">
+      <%= render 'searches/form' %>
+    </div>
+    <div>
+      <%= render 'books/tag_form', book: @book %>
+    </div>
+  </div>
 </header>
