@@ -1,5 +1,4 @@
 <% if user_signed_in? %>
-  <div class="d-flex  justify-content-center">
     <div class="search-form">
     <%= form_with url: search_path, method: :get, local: true do |f| %>
       <%= f.text_field :word %>
@@ -9,4 +8,3 @@
     <% end %>
   <% end %>
     </div>
-  </div>
