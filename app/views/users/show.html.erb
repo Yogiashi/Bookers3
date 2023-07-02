@@ -55,7 +55,7 @@
       <h4>7日間分の投稿数</h4>
       <table class='table table-bordered'>
         <thead>
-          <tr> 
+          <tr>
             <th>６日前</th>
             <th>５日前</th>
             <th>４日前</th>
@@ -77,6 +77,17 @@
           </tr>
         </tbody>
       </table>
+      <div>
+        <%= form_with url: user_search_path(@user), local: false, method: :get do |f| %>
+        <%= f.date_field :created_at %>
+        <%= f.submit '検索', class: 'btn btn-primary'  %>
+        <% end %>
+      </div>
+      <div id="search_result">
+        <% if @search_book.present? %>
+          <%= render 'search', search_book: @search_book %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
