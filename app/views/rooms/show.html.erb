@@ -5,14 +5,16 @@
         <%= link_to "ユーザー一覧に戻る", users_path %>
       </div>
       <h4 class="rooms-title"><strong>トークルーム</strong></h4>
-      <% @entries.each do |e| %>
-        <div class="user-name" style="display: inline-block;">
-        <strong>
-          <%= image_tag e.user.get_profile_image, class: "rounded-circle", size: '80x80' %>
-            <%= link_to e.user.name, user_path(e.user.id) %>
-        </strong>
-        </div>
-      <% end %>
+      <div class="d-flex">
+        <h5>メンバー :</h5>
+        <% @entries.each do |e| %>
+          <div class="user-name mx-3" style="display: inline-block;">
+            <%= image_tag e.user.get_profile_image, class: "rounded-circle", size: '50x50' %>
+              <%= link_to e.user.name, user_path(e.user.id) %>
+          </div>
+        <% end %>
+      </div>
+
       <hr>
       <div class="chats">
         <div class="chat">
