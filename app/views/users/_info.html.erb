@@ -17,15 +17,37 @@
     <td><%= link_to user.followers.count, user_followers_path(user) %></td>
   </tr>
 </table>
-<% if user != current_user %>
-  <div id='follow-btn'>
-     <%= render 'relationships/btn', user: user  %>
+<div class="d-flex">
+  <% if user != current_user %>
+    <div id='follow-btn'>
+       <%= render 'relationships/btn', user: user  %>
+    </div>
+  <% end %>
+  <!--DM機能-->
+  <div class=" ml-5">
+    <% unless user.id == current_user.id %>
+      <% if (current_user.following? @user) && (user.following? current_user)  %>
+        <% if @isRoom == true %>
+          <%= link_to room_path(@roomId) do %><i class="far fa-comments fa-3x" style='color: gray;'></i><% end %>
+        <% else %>
+          <%= form_for @room do |f| %>
+            <%= fields_for @entry do |e| %>
+              <%= e.hidden_field :user_id, value: user.id %>
+            <% end %>
+            <%= f.submit "チャット", class: 'btn btn-dark' %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
- 
-<% else %>
+</div>
+<!--DM機能-->
+<!--ユーザー編集ボタン-->
+<% if user == current_user %>
   <div class='row'>
     <%= link_to edit_user_path(user), class: "btn btn-secondary btn-block edit_user_#{user.id}" do %>
       <i class="fas fa-user-cog"></i>
     <% end %>
   </div>
 <% end %>
+<!--ユーザー編集ボタン-->
