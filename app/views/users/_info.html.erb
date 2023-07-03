@@ -24,17 +24,17 @@
     </div>
   <% end %>
   <!--DM機能-->
-  <div class=" ml-5">
+  <div class=" ml-3">
     <% unless user.id == current_user.id %>
       <% if (current_user.following? @user) && (user.following? current_user)  %>
         <% if @isRoom == true %>
-          <%= link_to room_path(@roomId) do %><i class="far fa-comments fa-3x" style='color: gray;'></i><% end %>
+          <%= link_to 'メッセージ', room_path(@roomId), class: 'btn btn-dark' %>
         <% else %>
           <%= form_for @room do |f| %>
             <%= fields_for @entry do |e| %>
               <%= e.hidden_field :user_id, value: user.id %>
             <% end %>
-            <%= f.submit "チャット", class: 'btn btn-dark' %>
+            <%= f.submit "メッセージ", class: 'btn btn-dark' %>
           <% end %>
         <% end %>
       <% end %>
