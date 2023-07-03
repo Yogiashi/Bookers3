@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <div class="left-button">
+        <%= link_to "ユーザー一覧に戻る", users_path %>
+      </div>
+      <h4 class="rooms-title">参加者</h4>
+      <% @entries.each do |e| %>
+        <div class="user-name">
+        <strong>
+          <%= image_tag e.user.get_profile_image, size: '100x100' %>
+            <%= link_to e.user.name, user_path(e.user.id) %>
+        </strong>
+        </div>
+      <% end %>
+      <hr>
+      <div class="chats">
+        <div class="chat">
+          <% if @messages.present? %>
+            <% @messages.each do |m| %>
+              <div class="d-flex mb-2">
+                <div>
+                  <%= image_tag m.user.get_profile_image, size: '80x80' %>
+                </div>
+                <div class="ml-5"> <strong class="mr-5"><%= m.content %></strong>
+                  <%= m.created_at.strftime("%Y-%m-%d %H:%M")%>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="posts">
+          <%= form_for @message do |f| %>
+            <%= f.text_field :content, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field" %>
+              <%= f.hidden_field :room_id, value: @room.id %>
+                <%= f.submit "送信",class: 'form-submit'%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
