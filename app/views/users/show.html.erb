@@ -26,7 +26,7 @@
             <% if @books.created_days_ago(1).count == 0 %>
         	    <td>前日の投稿はなし</td>
             <% else %>
-              <td><% @the_day_before = @books.created_days_ago(0).count / @books.created_days_ago(1).count  %>
+              <td><% @the_day_before = @books.created_days_ago(0).count / @books.created_days_ago(1).count.to_f %>
         	    <%= (@the_day_before * 100).round %>%</td>
             <% end %>
           </tr>

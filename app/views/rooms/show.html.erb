@@ -1,44 +1,46 @@
 <div class="container">
   <div class="row">
     <div class="col mx-auto">
-      <div class="left-button">
-        <%= link_to "ユーザー一覧に戻る", users_path %>
-      </div>
       <h4 class="rooms-title"><strong>トークルーム</strong></h4>
       <div class="d-flex">
-        <h5>メンバー :</h5>
+        <h5 class="pt-2">メンバー :</h5>
         <% @entries.each do |e| %>
-          <div class="user-name mx-3" style="display: inline-block;">
+          <div class="user-name mx-2" style="display: inline-block;">
             <%= image_tag e.user.get_profile_image, class: "rounded-circle", size: '50x50' %>
               <%= link_to e.user.name, user_path(e.user.id) %>
           </div>
         <% end %>
       </div>
-
       <hr>
-      <div class="chats">
-        <div class="chat">
+        <div class="chat mx-auto"  style="width:800px;">
           <% if @messages.present? %>
             <% @messages.each do |m| %>
-              <div class="d-flex mb-2">
-                <div>
-                  <%= image_tag m.user.get_profile_image, class: 'rounded-circle', size: '50x50' %>
+                <% if m.user_id != current_user.id %>
+
+                <div class="ml-3 row justify-content-start">
+                  <div class="d-flex mb-2">
+                    <%= image_tag m.user.get_profile_image, class: 'rounded-circle', size: '50x50' %>
+                    <strong class="ml-3 bg-success rounded p-2"><%= m.content %></strong>
+                  </div>
                 </div>
-                <div class="ml-3"> <strong class="mr-5"><%= m.content %></strong>
-                  <%= m.created_at.strftime("%Y-%m-%d %H:%M")%>
+                <% else %>
+                <div class="ml-3 row justify-content-end">
+                  <div class="d-flex mb-2">
+                    <strong class="mr-3 bg-secondary rounded p-2"><%= m.content %></strong>
+                    <%= image_tag m.user.get_profile_image, class: 'rounded-circle', size: '50x50' %>
+                  </div>
                 </div>
-              </div>
+              <% end %>
             <% end %>
           <% end %>
         </div>
-        <div class="posts">
+        <div class="posts  row justify-content-center">
           <%= form_for @message do |f| %>
             <%= f.text_field :content, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field" %>
               <%= f.hidden_field :room_id, value: @room.id %>
                 <%= f.submit "送信",class: 'form-submit'%>
           <% end %>
         </div>
-      </div>
     </div>
   </div>
 </div>
