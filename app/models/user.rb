@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
   has_many :group_users
-  has_many :groups, through: :group_users
+  has_many :groups, through: :group_users, source: :group
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
