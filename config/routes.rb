@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   resources :messages, only: [:create]
   resources :rooms, only: [:show, :create]
   resources :groups, except: [:destroy] do
-    resources :group_users, only: [:create, :destroy]
+    resource :group_users, only: [:create, :destroy]
+    get "new/mail" => "groups#new_mail"
+    get "send/mail" => "groups#send_mail"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
