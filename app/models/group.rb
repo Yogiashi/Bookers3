@@ -1,6 +1,6 @@
 class Group < ApplicationRecord
   has_many :group_users
-  has_many :users, through: :group_users
+  has_many :users, through: :group_users, source: :user
   has_one_attached :group_image
   
   validates :name, presence: true
@@ -9,5 +9,9 @@ class Group < ApplicationRecord
   
   def get_group_image
     (group_image.attached?) ? group_image : 'no_image.jpg'
+  end
+  
+  def user_include?(user)
+    group_users.exists?(user_id: user.id)
   end
 end

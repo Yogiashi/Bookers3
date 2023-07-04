@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
     @book = Book.new
     @group = Group.find(params[:id])
   end
-
+  
   def edit
   end
   

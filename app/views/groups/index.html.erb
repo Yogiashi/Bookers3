@@ -9,7 +9,7 @@
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Groups</h2>
-      <table class="table table-table">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th class="colspan-1"></th>
@@ -24,7 +24,7 @@
               <td><%= image_tag group.get_group_image, size: '80x80' %></td>
               <td><%= link_to group.name, group_path(group) %></td>
               <td><%= group.introduction %></td>
-              <td><%= group.group_users.count %></td>
+              <td><i class="fas fa-users"></i>  <%= group.group_users.count %></td>
               <td>
                 <% if group.owner_id == current_user.id %>
                   <%= link_to 'Edit', edit_group_path(group), class: 'btn btn-success' %>
