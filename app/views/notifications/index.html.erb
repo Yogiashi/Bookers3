@@ -1,23 +1,9 @@
-<% notifications = @notifications.where.not(visitor_id: current_user.id) %>
-<% if notifications.exists? %>
- 
-<div class="col-md-6 mx-auto">
-  <div class="form-inline">
-    <span>
-      <%= link_to user_path(visitor) do %>
-        <%= image_tag get_profile_image, size: "80x80" %>
-        <strong><%= visitor.name %></strong>
-      <% end %>
-    </span>
-      <%= 'さんが' %>
-      <% case notification.action %>
-      <% when 'follow' then %>
-        <%= "あなたをフォローしました" %>
-      <% when 'favorite' then %>
-        <%= link_to 'あなたの投稿', notification.book, style: "font-weight: bold;" %>
-        <%= "にいいねしました" %>
-      <% end %>
-<% else %>
-  <p>通知はありません</p>
-<% end %>
+<h4>通知</h4>
+  <% if @notifications.present? %>
+    <% @notifications.each do |notification| %>
+        <%= render "#{notification.action_type}", notification: notification %>
+    <% end %>
+  <% else %>
+    通知はありません
+  <% end %>
     
