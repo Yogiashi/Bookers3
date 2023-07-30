@@ -9,11 +9,14 @@
         <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
           <li>
-            <%= link_to notifications_path, class: "nav-link" do %>
+            <%= link_to notifications_path, class: "nav-link text-white" do %>
             <% if current_user.notifications.where(checked: false).exists? %>
-                <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #f2ee7d;"></i>
-              <% else %>
-                <i class="fa-sharp fa-solid fa-bell"></i>
+            <div class="fa-stack">
+              <i class="fas fa-bell fa-stack-2x" style="font-size: 18px;"></i>
+                <i class="fas fa-circle fa-stack-1x fa-inverse" style="font-size: 10px;color:red; position: absolute; padding-left: 1rem; padding-top: 0rem;"></i>
+            </div>
+            <% else %>
+            <i class="fas fa-bell" style="font-size: 18px;"></i>
               <% end %>
               通知一覧
             <% end %>
