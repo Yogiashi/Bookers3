@@ -103,14 +103,15 @@ ActiveRecord::Schema.define(version: 2023_07_29_115254) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "visitor_id", null: false
-    t.integer "visited_id", null: false
-    t.integer "book_id"
-    t.integer "book_comment_id"
-    t.string "action", default: "", null: false
+    t.string "subject_type"
+    t.integer "subject_id"
+    t.integer "user_id"
+    t.integer "action_type", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -157,6 +158,7 @@ ActiveRecord::Schema.define(version: 2023_07_29_115254) do
   add_foreign_key "group_users", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "view_counts", "books"
   add_foreign_key "view_counts", "users"
 end

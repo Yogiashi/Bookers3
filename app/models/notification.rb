@@ -1,8 +1,6 @@
 class Notification < ApplicationRecord
-  default_scope -> { order(created_at: :desc) }
-  belongs_to :book, optional: true
-  belongs_to :book_comment, optional: true
+  belongs_to :subject, polymorphic: true
+  belongs_to :user
 
-  belongs_to :visitor, class_name: 'User', foreign_key: 'visitor_id', optional: true
-  belongs_to :visited, class_name: 'User', foreign_key: 'visited_id', optional: true
+  enum action_type: { commented_to_own_post: 0, favorited_to_own_post: 1, followed_me: 2}
 end

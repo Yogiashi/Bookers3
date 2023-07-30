@@ -3,10 +3,6 @@ class FavoritesController < ApplicationController
     @book = Book.find(params[:book_id])
     favorite = current_user.favorites.new(book_id: @book.id)
     favorite.save
-    # redirect_to request.referer
-    # ここから
-    @book.create_notification_like!(current_user)
-    # ここまで
   end
 
   def destroy
